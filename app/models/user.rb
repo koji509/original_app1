@@ -8,4 +8,6 @@ class User < ApplicationRecord
     validates :nickname
     validates :profile
   end
+  has_many :fashions
+  has_many :comments
 end
