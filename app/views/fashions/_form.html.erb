@@ -1,22 +1,22 @@
 <%= form_with local: true do |f|%>
   <div class="field">
-    <%= f.label :hoge, "プロトタイプの名称" %><br />
-    <%= f.text_field :hoge %>
+    <%= f.label :artist, "アーティスト名" %><br />
+    <%= f.text_field :artist %>
   </div>
 
   <div class="field">
-    <%= f.label :hoge, "キャッチコピー" %><br />
-    <%= f.text_area :hoge, class: :form__text %>
+    <%= f.label :brand, "ブランド名" %><br />
+    <%= f.text_area :brand, class: :form__text %>
   </div>
 
   <div class="field">
-    <%= f.label :hoge, "コンセプト" %><br />
-    <%= f.text_area :hoge, class: :form__text %>
+    <%= f.label :item, "アイテム名" %><br />
+    <%= f.text_area :item, class: :form__text %>
   </div>
 
   <div class="field">
-    <%= f.label :hoge, "プロトタイプの画像" %><br />
-    <%= f.file_field :hoge %>
+    <%= f.label :image, "画像" %><br />
+    <%= f.file_field :image %>
   </div>
 
   <div class="actions">
