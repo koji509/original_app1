@@ -1,52 +1,52 @@
 <main class="main">
   <div class="inner">
-    <div class="prototype__wrapper">
-      <p class="prototype__hedding">
-        <%= "プロトタイプのタイトル"%>
+    <div class="fashion__wrapper">
+      <p class="fashion__hedding">
+        <%= "タイトル"%>
       </p>
-      <%= link_to "by プロトタイプの投稿者", root_path, class: :prototype__user %>
-      <%# プロトタイプの投稿者とログインしているユーザーが同じであれば以下を表示する %>
-        <div class="prototype__manage">
-          <%= link_to "編集する", root_path, class: :prototype__btn %>
-          <%= link_to "削除する", root_path, class: :prototype__btn %>
+      <%= link_to "by #{@fashion.user.user}", user_path(@fashion.user), class: :fashion__user %>
+      <% if current_user == @fashion.user%>
+        <div class="fashion__manage">
+          <%= link_to "編集する", edit_fashion_path, class: :fashion__btn %>
+          <%= link_to "削除する", fashion_path, class: :fashion__btn %>
         </div>
-      <%# // プロトタイプの投稿者とログインしているユーザーが同じであれば上記を表示する %>
-      <div class="prototype__image">
-        <%= image_tag "プロトタイプの画像" %>
+      <% end %>
+      <div class="fashion__image">
+        <%= image_tag @fashion.image %>
       </div>
-      <div class="prototype__body">
-        <div class="prototype__detail">
-          <p class="detail__title">キャッチコピー</p>
+      <div class="fashion__body">
+        <div class="fashion__detail">
+          <p class="detail__title">Brand</p>
           <p class="detail__message">
-            <%= "プロトタイプのキャッチコピー" %>
+            <%= @fashion.brand %>
           </p>
         </div>
-        <div class="prototype__detail">
-          <p class="detail__title">コンセプト</p>
+        <div class="fashion__detail">
+          <p class="detail__title">Item</p>
           <p class="detail__message">
-            <%= "プロトタイプのコンセプト" %>
+            <%= @fashion.item %>
           </p>
         </div>
       </div>
-      <div class="prototype__comments">
-        <%# ログインしているユーザーには以下のコメント投稿フォームを表示する %>
-          <%# <%= form_with local: true do |f|%>
+      <div class="fashion__comments">
+        <% if user_signed_in? %>
+          <%= form_with model: [@fashion, @comment], local: true do |f|%>
             <div class="field">
-              <%# <%= f.label :hoge, "コメント" %><br />
-              <%# <%= f.text_field :hoge %>
+              <%= f.label :text, "comment" %><br />
+              <%= f.text_field :text%>
             </div>
             <div class="actions">
-              <%# <%= f.submit "送信する", class: :form__btn  %>
+              <%= f.submit "送信する", class: :form__btn  %>
             </div>
-          <%# <% end %> 
-        <%# // ログインしているユーザーには上記を表示する %>
+          <% end %>
+        <% end %>
         <ul class="comments_lists">
-          <%# 投稿に紐づくコメントを一覧する処理を記述する %>
+          <% @comments.each do |comment| %>
             <li class="comments_list">
-              <%# <%= " コメントのテキスト "%>
-              <%# <%= link_to "（ ユーザー名 ）", root_path, class: :comment_user %>
+              <%= comment.text %>
+              <%= link_to "(#{comment.user.user})", user_path(comment.user), class: :comment_user %>
             </li>
-          <%# // 投稿に紐づくコメントを一覧する処理を記述する %>
+          <% end %>
         </ul>
       </div>
     </div>

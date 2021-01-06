@@ -47,7 +47,7 @@ class FashionsController < ApplicationController
   private
 
   def fashion_params
-    params.require(:fashion).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
+    params.require(:fashion).permit(:artist, :brand, :item, :image).merge(user_id: current_user.id)
   end
 
   def set_fashion
